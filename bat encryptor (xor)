@@ -1,0 +1,35 @@
+def xor_encrypt_decrypt(data, key):
+    return ''.join(chr(ord(c) ^ key) for c in data)
+
+def encrypt_bat_file(input_file, output_file, key):
+    # Read the content of the .bat file
+    with open(input_file, 'r') as file:
+        data = file.read()
+
+    # Encrypt the data using XOR
+    encrypted_data = xor_encrypt_decrypt(data, key)
+
+    # Write the encrypted data to the output file
+    with open(output_file, 'w') as file:
+        file.write(encrypted_data)
+
+    print(f"File '{input_file}' has been encrypted and saved as '{output_file}'.")
+
+def decrypt_bat_file(input_file, output_file, key):
+    # Read the encrypted content of the file
+    with open(input_file, 'r') as file:
+        encrypted_data = file.read()
+
+    # Decrypt the data using XOR
+    decrypted_data = xor_encrypt_decrypt(encrypted_data, key)
+
+    # Write the decrypted data to the output file
+    with open(output_file, 'w') as file:
+        file.write(decrypted_data)
+
+    print(f"File '{input_file}' has been decrypted and saved as '{output_file}'.")
+
+# Example usage:
+key = 123  # XOR key (it should be the same for both encryption and decryption)
+encrypt_bat_file('input.bat', 'encrypted.bat', key)
+decrypt_bat_file('encrypted.bat', 'decrypted.bat', key)
